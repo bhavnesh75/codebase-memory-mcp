@@ -240,35 +240,6 @@ configure_claude() {
 JSONEOF
 )
 
-# --- KiloCode auto-configuration ---
-
-configure_kilocode() {
-    echo ""
-    local binary_path="${INSTALL_DIR}/${BINARY_NAME}"
-    local config_file="$HOME/.config/kilocode/mcp_servers.json"
-
-    printf "%sConfigure KiloCode to use codebase-memory-mcp? [y/N] ${RESET}"
-    read -r answer
-    if [[ ! "$answer" =~ ^[Yy]$ ]]; then
-        return
-    fi
-
-    mkdir -p "$(dirname "$config_file")"
-
-    local mcp_entry
-    mcp_entry=$(cat <<JSONEOF
-{
-  "codebase-memory-mcp": {
-    "command": "${binary_path}"
-  }
-}
-JSONEOF
-)
-
-    echo "$mcp_entry" > "$config_file"
-
-    ok "KiloCode configured at ${config_file}"
-}
 
     mkdir -p "$(dirname "$settings_file")"
 
@@ -309,6 +280,36 @@ print()
         echo '    }'
         echo '  }'
     fi
+}
+
+# --- KiloCode auto-configuration ---
+
+configure_kilocode() {
+    echo ""
+    local binary_path="${INSTALL_DIR}/${BINARY_NAME}"
+    local config_file="$HOME/.config/kilocode/mcp_servers.json"
+
+    printf "%sConfigure KiloCode to use codebase-memory-mcp? [y/N] ${RESET}"
+    read -r answer
+    if [[ ! "$answer" =~ ^[Yy]$ ]]; then
+        return
+    fi
+
+    mkdir -p "$(dirname "$config_file")"
+
+    local mcp_entry
+    mcp_entry=$(cat <<JSONEOF
+{
+  "codebase-memory-mcp": {
+    "command": "${binary_path}"
+  }
+}
+JSONEOF
+)
+
+    echo "$mcp_entry" > "$config_file"
+
+    ok "KiloCode configured at ${config_file}"
 }
 
 # --- PATH check ---
