@@ -862,7 +862,17 @@ func killocodeConfigPath() string {
 	if err != nil {
 		return ""
 	}
-	return filepath.Join(home, ".config", "killocode", "config.json")
+
+	return filepath.Join(
+		home,
+		".config",
+		"Code",
+		"User",
+		"globalStorage",
+		"kilocode.kilo-code",
+		"settings",
+		"mcp_settings.json",
+	)
 }
 
 // installKilloCodeMCP upserts our MCP server in Killo Code's config (uses "mcp" key with "type":"local").

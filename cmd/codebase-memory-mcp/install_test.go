@@ -671,7 +671,7 @@ func TestKilloCodeConfigPath(t *testing.T) {
 	if path == "" {
 		t.Fatal("killocodeConfigPath returned empty")
 	}
-	if !strings.HasSuffix(path, filepath.Join(".config", "killocode", "config.json")) {
+	if !strings.HasSuffix(path, filepath.Join(".config", "Code", "User", "globalStorage", "kilocode.kilo-code", "settings", "mcp_settings.json")) {
 		t.Fatalf("unexpected path: %s", path)
 	}
 }
@@ -680,7 +680,16 @@ func TestKilloCodeMCPInstall(t *testing.T) {
 	home := t.TempDir()
 	setTestHome(t, home)
 
-	configPath := filepath.Join(home, ".config", "killocode", "config.json")
+	configPath := filepath.Join(
+		home,
+		".config",
+		"Code",
+		"User",
+		"globalStorage",
+		"kilocode.kilo-code",
+		"settings",
+		"mcp_settings.json",
+	)
 	binaryPath := "/usr/local/bin/codebase-memory-mcp"
 
 	installKilloCodeMCP(binaryPath, configPath, installConfig{})
@@ -714,7 +723,16 @@ func TestKilloCodeMCPPreservesSettings(t *testing.T) {
 	home := t.TempDir()
 	setTestHome(t, home)
 
-	configPath := filepath.Join(home, ".config", "killocode", "config.json")
+	configPath := filepath.Join(
+		home,
+		".config",
+		"Code",
+		"User",
+		"globalStorage",
+		"kilocode.kilo-code",
+		"settings",
+		"mcp_settings.json",
+	)
 	if err := os.MkdirAll(filepath.Dir(configPath), 0o750); err != nil {
 		t.Fatal(err)
 	}
@@ -756,7 +774,16 @@ func TestKilloCodeMCPUninstall(t *testing.T) {
 	home := t.TempDir()
 	setTestHome(t, home)
 
-	configPath := filepath.Join(home, ".config", "killocode", "config.json")
+	configPath := filepath.Join(
+		home,
+		".config",
+		"Code",
+		"User",
+		"globalStorage",
+		"kilocode.kilo-code",
+		"settings",
+		"mcp_settings.json",
+	)
 	binaryPath := "/usr/local/bin/codebase-memory-mcp"
 
 	installKilloCodeMCP(binaryPath, configPath, installConfig{})
