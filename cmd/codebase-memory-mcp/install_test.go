@@ -713,7 +713,7 @@ func TestKilloCodeMCPInstall(t *testing.T) {
 	if entry["type"] != "local" {
 		t.Fatalf("expected type=local, got %v", entry["type"])
 	}
-	cmd, ok := entry["command"].([]any)
+	cmd := server["command"].(string)
 	if !ok || len(cmd) != 1 || cmd[0] != binaryPath {
 		t.Fatalf("expected command=[%s], got %v", binaryPath, entry["command"])
 	}

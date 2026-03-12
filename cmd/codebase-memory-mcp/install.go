@@ -896,16 +896,15 @@ func installKilloCodeMCP(binaryPath, configPath string, cfg installConfig) {
 		}
 	}
 
-	servers, ok := root["mcp"].(map[string]any)
+	servers, ok := root["mcpServers"].(map[string]any)
 	if !ok {
 		servers = make(map[string]any)
 	}
 
 	servers[mcpServerKey] = map[string]any{
-		"type":    "local",
-		"command": []string{binaryPath},
+		"command": binaryPath,
 	}
-	root["mcp"] = servers
+	root["mcpServers"] = servers
 
 	if err := os.MkdirAll(filepath.Dir(configPath), 0o750); err != nil {
 		fmt.Printf("  ⚠ mkdir %s: %v\n", filepath.Dir(configPath), err)
@@ -939,7 +938,7 @@ func removeKilloCodeMCP(configPath string, cfg installConfig) {
 		return
 	}
 
-	servers, ok := root["mcp"].(map[string]any)
+	servers, ok := root["mcpServers"].(map[string]any)
 	if !ok {
 		return
 	}
@@ -955,7 +954,7 @@ func removeKilloCodeMCP(configPath string, cfg installConfig) {
 	}
 
 	delete(servers, mcpServerKey)
-	root["mcp"] = servers
+	root["mcpServers"] = servers
 
 	out, err := json.MarshalIndent(root, "", "  ")
 	if err != nil {
